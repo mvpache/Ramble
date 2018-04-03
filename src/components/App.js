@@ -17,3 +17,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+//two main components in APP - Search Bar and content
