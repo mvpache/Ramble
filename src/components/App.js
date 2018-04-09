@@ -8,9 +8,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
         <NavBar />
         <Body />
       </div>
@@ -19,6 +16,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-//two main components in APP - Search Bar and content

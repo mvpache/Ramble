@@ -1,6 +1,7 @@
 const intialState = {
   activeMovie: {},
-  activeUser: {}
+  activeUser: {},
+  loading: null,
 }
 
 export default (state = intialState, action) => {
