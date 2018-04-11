@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { apiKey }from '../../config'
 
 import MovieLink from './MovieLink';
+
 
 const Movies = styled.div`
   display: flex;
