@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Home } from './bodyComponents';
-
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { Home, SearchResults } from './bodyComponents';
 
 const Wrapper = styled.div`
   background: whitesmoke;
@@ -13,9 +14,12 @@ const Wrapper = styled.div`
 class Body extends Component {
   render() {
     return (
-      <Wrapper>
-        <Home />
-      </Wrapper>
+      <Router>
+        <Wrapper>
+          <Route path='/search' component={ SearchResults } />
+          <Route exact path='/' component={ Home } />
+        </Wrapper>
+      </Router>
     )
   }
 }
