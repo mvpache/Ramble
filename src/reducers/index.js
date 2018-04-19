@@ -1,7 +1,7 @@
-import { LOADING, SEARCH_SUCESSFUL, ERROR } from '../actions';
+import { LOADING, SEARCH_SUCESSFUL, ERROR, ACTIVATE_MOVIE } from '../actions';
 
 const intialState = {
-  activeMovie: {},
+  activeMovie: { title: '' },
   activeUser: {},
   loading: false,
   message: null,
@@ -13,7 +13,10 @@ export default (state = intialState, action) => {
     case LOADING:
       return { ...state, loading: true };
     case SEARCH_SUCESSFUL:
-      return { ...state, searchResults: action.payload.results }
+      return { ...state, searchResults: action.payload.results };
+    case ACTIVATE_MOVIE:
+      console.log('payload', action.payload)
+      return { ...state, activeMovie: (action.payload) } ;
     case ERROR:
       return { ...state, message: action.message };
     default:

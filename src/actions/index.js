@@ -4,6 +4,7 @@ import { apiKey } from '../config';
 export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';
 export const ERROR = 'ERROR';
+export const ACTIVATE_MOVIE = 'ACTIVATE_MOVIE';
 
 
 export const performSearch = (searchTerm) => dispatch => {
@@ -17,6 +18,13 @@ export const performSearch = (searchTerm) => dispatch => {
     dispatch({ type: ERROR, message: 'Error with Search' })
   });
 };
+
+export const activateMovie = (movie) => {
+  return {
+    type: ACTIVATE_MOVIE,
+    payload: movie
+  };
+}
 
 /*need a search AC using 
 https://developers.themoviedb.org/3/search/search-movies

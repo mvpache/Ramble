@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { performSearch } from '../../actions';
 
@@ -9,7 +10,6 @@ class Search extends Component {
 
     this.state = {
       searchValue: '',
-      redirect: false,
     };
   }
 
@@ -20,10 +20,7 @@ class Search extends Component {
   submitSearch = (event) => {
     event.preventDefault();
     this.props.performSearch(this.state.searchValue);
-    this.setState({
-      searchValue: '',
-      redirect: true,
-    });
+    this.props.history.push('/search')
   }
 
   render() {
@@ -45,4 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { performSearch })(Search);
+export default withRouter(connect(mapStateToProps, { performSearch })(Search));
