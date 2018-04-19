@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
-import Search from './navComponents/Search'
+import Search from './navComponents/Search';
 
 const Wrapper = styled.div`
   background: Black;
@@ -19,11 +20,13 @@ class NavBar extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Movie Ramble</Title>
+        <Title onClick={() => { this.props.history.push('/')}}>
+        Movie Ramble
+        </Title>
         <Search/>
       </Wrapper>
     )
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
