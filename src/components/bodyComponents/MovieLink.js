@@ -14,7 +14,7 @@ const MovieImage = styled.img`
 
 class MovieLink extends Component {
   activate() {
-    this.props.activateMovie(this.props.movie);
+    this.props.activateMovie(this.props.movie.id);
     this.props.history.push(`/movie/${this.props.movie.title}`);
   };
 

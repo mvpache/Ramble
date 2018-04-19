@@ -19,13 +19,17 @@ export const performSearch = (searchTerm) => dispatch => {
   });
 };
 
-export const activateMovie = (movie) => {
-  return {
-    type: ACTIVATE_MOVIE,
-    payload: movie
-  };
-}
+export const activateMovie = (id) => dispatch => {
+    dispatch({ type: LOADING });
 
+    axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`)
+      .then(response => {
+        dispatch({ type: ACTIVATE_MOVIE, payload: response.data })
+      })
+      .catch(response => {
+        dispatch({ type: ERROR, message: 'Error with Activating Movie' })
+  });
+};
 /*need a search AC using 
 https://developers.themoviedb.org/3/search/search-movies
 

@@ -1,7 +1,7 @@
 import { LOADING, SEARCH_SUCESSFUL, ERROR, ACTIVATE_MOVIE } from '../actions';
 
 const intialState = {
-  activeMovie: { title: '' },
+  activeMovie: {},
   activeUser: {},
   loading: false,
   message: null,
@@ -13,10 +13,9 @@ export default (state = intialState, action) => {
     case LOADING:
       return { ...state, loading: true };
     case SEARCH_SUCESSFUL:
-      return { ...state, searchResults: action.payload.results };
+      return { ...state, searchResults: action.payload.results, loading: false };
     case ACTIVATE_MOVIE:
-      console.log('payload', action.payload)
-      return { ...state, activeMovie: (action.payload) } ;
+      return { ...state, activeMovie: (action.payload), loading: false } ;
     case ERROR:
       return { ...state, message: action.message };
     default:
@@ -24,5 +23,4 @@ export default (state = intialState, action) => {
   }
 }
 
-//need reducer functions for search, loading, search succesful
-//Split an error handler reducer?
+//TODO: add an unactivate movie action 
