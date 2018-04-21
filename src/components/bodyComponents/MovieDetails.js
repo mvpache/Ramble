@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import axios from 'axios';
 
 import { resetLoading } from '../../actions';
-import { apiKey } from '../../config';
 
 const Movie = styled.div`
   display: flex;
@@ -36,39 +34,28 @@ const MoviePoster = styled.img`
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      credits: '',
-    };
   }
+
   componentDidMount() {
     this.props.resetLoading();
-
-    axios.get(`https://api.themoviedb.org/3/movie/${this.props.activeMovie.id}/credits?api_key=${apiKey}`)
-      .then(response => {
-        this.setState({
-          credits: response.data
-        });
-      })
-      .catch(response => {
-        console.log(response)
-      });
   }
 
   render() {
-    return (
+    const movie = this.props.activeMovie;;
+     return (
       <Movie>
         <InfoLeft>
           <MoviePoster
-            src={`https://image.tmdb.org/t/p/original${this.props.activeMovie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${movie.info.poster_path}`}
           />
-          <a>{this.props.activeMovie.homepage}</a>
+          <a>{movie.info.homepage}</a>
         </InfoLeft>
       <InfoRight>
-        <h2>{this.props.activeMovie.title}</h2>
-        <h3>{this.props.activeMovie.tagline}</h3>
-        <p>{this.props.activeMovie.overview}</p>
-        <p>{this.props.activeMovie.release_date}</p>
-          {this.props.activeMovie.genres.map(genre => {
+        <h2>{movie.info.title}</h2>
+        <h3>{movie.info.tagline}</h3>
+        <p>{movie.info.overview}</p>
+        <p>{movie.info.release_date}</p>
+          {movie.info.genres.map(genre => {
             return <p key={genre.id}>{genre.name}</p>
           })}
       </InfoRight>

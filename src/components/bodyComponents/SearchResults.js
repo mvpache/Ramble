@@ -26,6 +26,3 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(SearchResults)
 
-//need to map out search results
-//need to be redirected here upon search submit
-

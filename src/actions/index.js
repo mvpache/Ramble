@@ -8,6 +8,12 @@ export const ACTIVATE_MOVIE = 'ACTIVATE_MOVIE';
 export const RESET_LOADING = 'RESET_LOADING';
 
 
+const movie = {
+  info: {},
+  cast: [],
+  crew: [],
+}
+
 export const performSearch = (searchTerm) => dispatch => {
   dispatch({ type: LOADING });
 
@@ -25,8 +31,17 @@ export const activateMovie = (id) => dispatch => {
 
     axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`)
       .then(response => {
-        dispatch({ type: ACTIVATE_MOVIE, payload: response.data })
+        movie.info = response.data;
+        axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`)
+          .then(response => {
+            movie.cast = response.data.cast;
+            movie.crew = response.data.crew;
+            dispatch({ type: ACTIVATE_MOVIE, payload: movie })
           })
+          .catch(response => {
+            dispatch({ type: ERROR, message: 'Error with Credit GET' })
+          })
+        })
       .catch(response => {
         dispatch({ type: ERROR, message: 'Error with Activating Movie' })
   });
