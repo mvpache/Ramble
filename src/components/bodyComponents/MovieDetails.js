@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { resetLoading } from '../../actions';
+import Credits from './Credits'
 
 const Movie = styled.div`
-  display: flex;
   box-sizing: border-box;
   margin: 2%;
 `;
@@ -17,7 +17,7 @@ const InfoRight = styled.div`
   padding: 1%;
 `;
 
-const InfoLeft = styled.div`
+const PosterWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 50%;
@@ -31,6 +31,10 @@ const MoviePoster = styled.img`
   height: 328px;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+`;
+
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
@@ -39,26 +43,35 @@ class MovieDetails extends Component {
   componentDidMount() {
     this.props.resetLoading();
   }
-
+  //make a new component for mapping/displaying cast crew due to logic requirements maybe even one for the videos?
   render() {
-    const movie = this.props.activeMovie;;
+    const movie = this.props.activeMovie;
      return (
       <Movie>
-        <InfoLeft>
-          <MoviePoster
-            src={`https://image.tmdb.org/t/p/original${movie.info.poster_path}`}
-          />
-          <a>{movie.info.homepage}</a>
-        </InfoLeft>
-      <InfoRight>
-        <h2>{movie.info.title}</h2>
-        <h3>{movie.info.tagline}</h3>
-        <p>{movie.info.overview}</p>
-        <p>{movie.info.release_date}</p>
-          {movie.info.genres.map(genre => {
-            return <p key={genre.id}>{genre.name}</p>
-          })}
-      </InfoRight>
+        <Wrapper>
+           <PosterWrapper> 
+             <MoviePoster
+               src={`https://image.tmdb.org/t/p/original${movie.info.poster_path}`}
+             />
+             <a>{movie.info.homepage}</a>
+           </PosterWrapper>
+           <InfoRight>
+             <div>
+              <h2>{movie.info.title}</h2>
+              <h3>{movie.info.tagline}</h3>
+              <Credits cast={movie.cast} crew={movie.crew} />
+             </div>
+             <div>
+               <p></p>
+             </div>
+           </InfoRight>
+        </Wrapper>
+        <div>
+          <p>{movie.info.overview}</p>
+        </div>
+        <Wrapper>
+          <div>Trailers/Videos</div>
+        </Wrapper>
       </Movie>
     )
   }
