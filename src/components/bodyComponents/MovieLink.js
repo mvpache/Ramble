@@ -8,17 +8,19 @@ import { activateMovie } from '../../actions';
 const MovieImage = styled.img`
   margin: 2%;
   display: inline-block;
-  width: 27%;
-  height: 54%;
+  width: 29%;
+  height: 44%;
 `;
 
 class MovieLink extends Component {
   activate() {
     this.props.activateMovie(this.props.movie.id);
-    this.props.history.push(`/movie/${this.props.movie.title}`);
   };
 
   render() {
+    if (this.props.loading == 'activeMovie Loaded') {
+      this.props.history.push(`/movie/${this.props.movie.title}`);
+    }
     return (
       <MovieImage
         src={`https://image.tmdb.org/t/p/original${this.props.movie.poster_path}`}

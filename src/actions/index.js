@@ -5,6 +5,7 @@ export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';
 export const ERROR = 'ERROR';
 export const ACTIVATE_MOVIE = 'ACTIVATE_MOVIE';
+export const RESET_LOADING = 'RESET_LOADING';
 
 
 export const performSearch = (searchTerm) => dispatch => {
@@ -25,11 +26,20 @@ export const activateMovie = (id) => dispatch => {
     axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`)
       .then(response => {
         dispatch({ type: ACTIVATE_MOVIE, payload: response.data })
-      })
+          })
       .catch(response => {
         dispatch({ type: ERROR, message: 'Error with Activating Movie' })
   });
 };
+
+export const resetLoading = () => {
+  return {
+    type: RESET_LOADING,
+    payload: false
+  };
+}
+
+
 /*need a search AC using 
 https://developers.themoviedb.org/3/search/search-movies
 
