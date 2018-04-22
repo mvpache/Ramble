@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { resetLoading } from '../../actions';
-import Credits from './Credits'
+import Credits from './Credits';
+import Trailers from './Trailers';
 
 const Movie = styled.div`
   box-sizing: border-box;
@@ -43,7 +44,7 @@ class MovieDetails extends Component {
   componentDidMount() {
     this.props.resetLoading();
   }
-  //make a new component for mapping/displaying cast crew due to logic requirements maybe even one for the videos?
+
   render() {
     const movie = this.props.activeMovie;
      return (
@@ -53,13 +54,13 @@ class MovieDetails extends Component {
              <MoviePoster
                src={`https://image.tmdb.org/t/p/original${movie.info.poster_path}`}
              />
-             <a>{movie.info.homepage}</a>
+             <a href={movie.info.homepage}>Website</a>
            </PosterWrapper>
            <InfoRight>
              <div>
               <h2>{movie.info.title}</h2>
-              <h3>{movie.info.tagline}</h3>
-              <Credits cast={movie.cast} crew={movie.crew} />
+               <Credits cast={movie.cast} crew={movie.crew} />
+              <h4>{movie.info.tagline}</h4>
              </div>
              <div>
                <p></p>
@@ -70,7 +71,7 @@ class MovieDetails extends Component {
           <p>{movie.info.overview}</p>
         </div>
         <Wrapper>
-          <div>Trailers/Videos</div>
+          <Trailers id={movie.info.id}/>
         </Wrapper>
       </Movie>
     )
