@@ -15,7 +15,7 @@ class Body extends Component {
   render() {
     return (
         <Wrapper>
-          <Route path='/movie/:title' component={MovieDetails} />
+          <Route path='/movie/:title' component={ MovieDetails } />
           <Route path='/search' component={ SearchResults } />
           <Route exact path='/' component={ Home } />
         </Wrapper>

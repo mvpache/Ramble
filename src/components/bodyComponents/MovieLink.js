@@ -13,13 +13,14 @@ const MovieImage = styled.img`
 `;
 
 class MovieLink extends Component {
+
   activate() {
     this.props.activateMovie(this.props.movie.id);
   };
 
   render() {
     if (this.props.loading == 'activeMovie Loaded') {
-      this.props.history.push(`/movie/${this.props.movie.title}`);
+      this.props.history.push(`/movie/${this.props.activeMovie.info.title}`);
     }
     return (
       <MovieImage
@@ -31,6 +32,7 @@ class MovieLink extends Component {
 }
 const mapStateToProps = state => {
   return {
+    activeMovie: state.activeMovie,
     error: state.error,
     loading: state.loading,
   };

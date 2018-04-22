@@ -16,9 +16,9 @@ class Credits extends Component {
         if (item.job == 'Screenplay') {
           return <p key={item.id}>Screenplay by: {item.name}</p>
         }})}
-        {this.props.cast.map(item => {
+        Starring: {this.props.cast.map(item => {
           if (this.props.cast.indexOf(item) < 4) {
-            return <p key={item.id}>Starring: {item.name}</p>
+            return <p key={item.id}>{item.name}</p>
           }
         })}
     </div>
