@@ -19,7 +19,7 @@ class MovieLink extends Component {
   };
 
   render() {
-    if (this.props.loading == 'activeMovie Loaded') {
+    if (this.props.loading === 'activeMovie Loaded') {
       this.props.history.push(`/movie/${this.props.activeMovie.info.title}`);
     }
     return (

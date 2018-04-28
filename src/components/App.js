@@ -20,26 +20,22 @@ class App extends Component {
 
 export default App;
 
-//make a routes map
-//add routes map to store
-//make route changing actions
-//make route changing reducers
-//set up body renderProp
 
 
+//!Features To do 
 
-/*
-<Body render={(component) => (
-  <Component />>
-)
+//TODO: Click on actor/crew to see their credits
 
+//TODO: See Full Cast/Crew on a movie 
 
-Body
+//TODO: Fuller styling
 
-render()
-  return(
-    <div>
-      {this.props.render(component)}
-    </div>
-  )
-*/
+//TODO: Component unmount to deactivate movie/person
+
+//TODO: Add a footer
+
+//TODO: Add similar?
+
+//TODO: Click on poster to see a larger version/or take you to poster viewer
+
+//TODO: if no active movie(didn't arrive by link) grab movie based on URL

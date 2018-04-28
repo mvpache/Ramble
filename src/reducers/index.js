@@ -1,4 +1,4 @@
-import { LOADING, SEARCH_SUCESSFUL, ERROR, ACTIVATE_MOVIE, RESET_LOADING } from '../actions';
+import { LOADING, SEARCH_SUCESSFUL, ERROR, ACTIVATE_MOVIE, RESET_LOADING, ACTIVATE_PERSON } from '../actions';
 
 const intialState = {
   activeMovie: {
@@ -6,6 +6,7 @@ const intialState = {
     cast: [],
     crew: [],
   },
+  activePerson: {},
   activeUser: {},
   loading: false,
   message: null,
@@ -19,7 +20,9 @@ export default (state = intialState, action) => {
     case SEARCH_SUCESSFUL:
       return { ...state, searchResults: action.payload.results, loading: false };
     case ACTIVATE_MOVIE:
-      return { ...state, activeMovie: action.payload, loading: 'activeMovie Loaded' } ;
+      return { ...state, activeMovie: action.payload, loading: 'activeMovie Loaded' };
+    case ACTIVATE_PERSON:
+      return { ...state, activePerson: action.payload, loading: 'activePerson Loaded' };
     case RESET_LOADING:
       return { ...state, loading: false };
     case ERROR:
