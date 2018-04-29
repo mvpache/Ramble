@@ -6,9 +6,21 @@ import { activateMovie } from '../../actions';
 import AccordianChild from './AccordianChild';
 
 class AccordianParent extends Component {
+  constructor() {
+    super();
+
+    this.state ={
+      show: false,
+    };
+  };
+
   activate(id) {
     this.props.activateMovie(id);
   };
+
+  toggleShow() {
+    this.setState({ show: !this.state.show })
+  }
 
   render() {
     if (this.props.loading === 'activeMovie Loaded') {
@@ -16,12 +28,18 @@ class AccordianParent extends Component {
     }
     return (
       <div>
-        {this.props.category ? <h3>{this.props.category}: </h3> : <h3>Appeared in: </h3>}
-        {this.props.contents.map(movie => {
+        {this.props.category ? 
+        <h3 onClick={()=> { this.toggleShow() }}>{this.props.category}: </h3> 
+        : 
+        <h3 onClick={()=> { this.toggleShow() }}>Appeared in: </h3>
+        }
+        <div style={{ display: this.state.show ? "inherit" : "none" }}>
+          {this.props.contents.map(movie => {
           return <AccordianChild movie={movie}
-          activate={() => this.activate(movie.id)} />
+          activate={() => this.activate(movie.id)}/>
         }
         )}
+        </div>
       </div>
     )
   }
