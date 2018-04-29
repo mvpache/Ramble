@@ -8,15 +8,14 @@ import { activateMovie } from '../../actions';
 const MovieImage = styled.img`
   margin: 2%;
   display: inline-block;
-  width: 29%;
-  height: 44%;
+  width: 130px;
+  height: 197px;
 `;
 
 class MovieLink extends Component {
-
   activate() {
     this.props.activateMovie(this.props.movie.id);
-  };
+  }
 
   render() {
     if (this.props.loading === 'activeMovie Loaded') {
@@ -24,10 +23,14 @@ class MovieLink extends Component {
     }
     return (
       <MovieImage
-        src={`https://image.tmdb.org/t/p/original${this.props.movie.poster_path}`}
-        onClick={ () => { this.activate() }}
+        src={`https://image.tmdb.org/t/p/original${
+          this.props.movie.poster_path
+        }`}
+        onClick={() => {
+          this.activate();
+        }}
       />
-    )
+    );
   }
 }
 const mapStateToProps = state => {
@@ -38,4 +41,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { activateMovie })(MovieLink));
+export default withRouter(
+  connect(mapStateToProps, { activateMovie })(MovieLink)
+);

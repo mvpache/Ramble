@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import MovieLink from './MovieLink';
 import { apiKey } from '../../config';
 
 const PersonPic = styled.img`
@@ -11,20 +12,50 @@ const PersonPic = styled.img`
   height: 328px;
 `;
 
+const Movies = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const MovieCredit = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 133px;
+  margin: 2%;
+`;
+
 class PersonDetails extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
     return (
-    <div>
-      <p>{this.props.activePerson.info.name}</p>
-        <PersonPic src={`https://image.tmdb.org/t/p/original/${this.props.activePerson.info.profile_path}`}/>
-      <p>{this.props.activePerson.info.biography}</p>
-      <p>{this.props.activePerson.info.birthday}</p>
-    </div>
-  )}
+      <div>
+        <div>
+          <p>{this.props.activePerson.info.name}</p>
+          <PersonPic
+            src={`https://image.tmdb.org/t/p/original/${
+              this.props.activePerson.info.profile_path
+            }`}
+          />
+          <p>{this.props.activePerson.info.biography}</p>
+          <p>{this.props.activePerson.info.birthday}</p>
+        </div>
+        Appeared in:{' '}
+        <Movies>
+          {this.props.activePerson.credits.cast.map(movie => {
+            return (
+              <MovieCredit>
+                <MovieLink key={movie.id} movie={movie} />
+                <p>as {movie.character}</p>
+              </MovieCredit>
+            );
+          })}
+        </Movies>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
@@ -36,16 +67,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(PersonDetails);
-
-// birthday(pin): "1972-05-02"
-// deathday(pin): null
-// id(pin): 18918
-// name(pin): "Dwayne Johnson"
-// gender(pin): 2
-// biography(pin): "Dwayne Douglas Johnson (born May 2, 1972), also known by his ring name The Rock, is an American and Canadian actor, producer and semi-retired professional wrestler, signed with WWE. "
-// popularity(pin): 25.790974
-// place_of_birth(pin): "Hayward, California, USA"
-// profile_path(pin): "/akweMz59qsSoPUJYe7QpjAc2rQp.jpg"
-// adult(pin): false
-// imdb_id(pin): "nm0425005"
-// homepage(pin): null
