@@ -15,18 +15,18 @@ class Credits extends Component {
 
   render() {
     if (this.props.loading === 'activePerson Loaded') {
-      this.props.history.push(`/person/${this.props.activePerson.name}`);
+      this.props.history.push(`/person/${this.props.activePerson.info.name}`);
     }
     return(
       <div>
         Directed by: {this.props.crew.map(item => {
-        if (item.job == 'Director') {
+        if (item.job === 'Director') {
           return <p key={item.id}
             onClick={() => { this.activate(item.id) }}>
           {item.name}</p>
           }})}
         Screenplay by: {this.props.crew.map(item => {
-        if (item.job == 'Screenplay') {
+        if (item.job === 'Screenplay') {
           return <p key={item.id}
             onClick={() => { this.activate(item.id) }}>
             {item.name}</p>

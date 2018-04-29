@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import MovieLink from './MovieLink';
-import { apiKey } from '../../config';
+import AccordianWrapper from '../accordianComponents/AccordianWrapper'
 
 const PersonPic = styled.img`
   margin: 2%;
@@ -42,7 +42,9 @@ class PersonDetails extends Component {
           <p>{this.props.activePerson.info.biography}</p>
           <p>{this.props.activePerson.info.birthday}</p>
         </div>
-        Appeared in:{' '}
+        <AccordianWrapper 
+          credits={this.props.activePerson.credits} />
+        {/* Appears in:{' '}
         <Movies>
           {this.props.activePerson.credits.cast.map(movie => {
             return (
@@ -52,7 +54,7 @@ class PersonDetails extends Component {
               </MovieCredit>
             );
           })}
-        </Movies>
+        </Movies> */}
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { resetLoading } from '../../actions';
+import { resetLoading, performSearch } from '../../actions';
 import Credits from './Credits';
 import Trailers from './Trailers';
 
@@ -46,21 +46,24 @@ class MovieDetails extends Component {
   }
 
   render() {
-    const movie = this.props.activeMovie;
+    if(this.props.activeMovie.info.title === undefined) {
+      this.props.performSearch(this.props.match.params.title)
+      this.props.history.push('/search') //eventually update this to just jump to first results' page?
+    }
      return (
       <Movie>
         <Wrapper>
            <PosterWrapper> 
              <MoviePoster
-               src={`https://image.tmdb.org/t/p/original${movie.info.poster_path}`}
+               src={`https://image.tmdb.org/t/p/original${this.props.activeMovie.info.poster_path}`}
              />
-             <a href={movie.info.homepage}>Website</a>
+             <a href={this.props.activeMovie.info.homepage}>Website</a>
            </PosterWrapper>
            <InfoRight>
              <div>
-              <h2>{movie.info.title}</h2>
-               <Credits cast={movie.cast} crew={movie.crew} />
-              <h4>{movie.info.tagline}</h4>
+              <h2>{this.props.activeMovie.info.title}</h2>
+               <Credits cast={this.props.activeMovie.cast} crew={this.props.activeMovie.crew} />
+              <h4>{this.props.activeMovie.info.tagline}</h4>
              </div>
              <div>
                <p></p>
@@ -68,10 +71,10 @@ class MovieDetails extends Component {
            </InfoRight>
         </Wrapper>
         <div>
-          <p>{movie.info.overview}</p>
+          <p>{this.props.activeMovie.info.overview}</p>
         </div>
         <Wrapper>
-          <Trailers id={movie.info.id}/>
+          <Trailers id={this.props.activeMovie.info.id}/>
         </Wrapper>
       </Movie>
     )
@@ -86,4 +89,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { resetLoading })(MovieDetails);
+export default connect(mapStateToProps, { resetLoading, performSearch })(MovieDetails);

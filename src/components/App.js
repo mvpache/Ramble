@@ -24,8 +24,6 @@ export default App;
 
 //!Features To do 
 
-//TODO: Click on actor/crew to see their credits
-
 //TODO: See Full Cast/Crew on a movie 
 
 //TODO: Fuller styling
@@ -35,6 +33,8 @@ export default App;
 //TODO: Add a footer
 
 //TODO: Add similar?
+
+//TODO: Add a loading component/animation
 
 //TODO: Click on poster to see a larger version/or take you to poster viewer
 
