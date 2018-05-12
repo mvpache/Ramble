@@ -9,17 +9,17 @@ class AccordianParent extends Component {
   constructor() {
     super();
 
-    this.state ={
+    this.state = {
       show: false,
     };
-  };
+  }
 
   activate(id) {
     this.props.activateMovie(id);
-  };
+  }
 
   toggleShow() {
-    this.setState({ show: !this.state.show })
+    this.setState({ show: !this.state.show });
   }
 
   render() {
@@ -28,20 +28,38 @@ class AccordianParent extends Component {
     }
     return (
       <div>
-        {this.props.category ? 
-        <h3 onClick={()=> { this.toggleShow() }}>{this.props.category}: </h3> 
-        : 
-        <h3 onClick={()=> { this.toggleShow() }}>Appeared in: </h3>
-        }
-        <div style={{ display: this.state.show ? "inherit" : "none" }}>
-          {this.props.contents.map(movie => {
-          return <AccordianChild movie={movie}
-          activate={() => this.activate(movie.id)}/>
-        }
+        {' '}
+        {/* for each parent either display the category title or "appeared in*/}
+        {this.props.category ? (
+          <h3
+            onClick={() => {
+              this.toggleShow();
+            }}
+          >
+            {this.props.category}:{' '}
+          </h3>
+        ) : (
+          <h3
+            onClick={() => {
+              this.toggleShow();
+            }}
+          >
+            Appeared in:{' '}
+          </h3>
         )}
+        <div style={{ display: this.state.show ? 'inherit' : 'none' }}>
+          {this.props.contents.map(movie => {
+            return (
+              <AccordianChild
+                key={movie.index}
+                movie={movie}
+                activate={() => this.activate(movie.id)}
+              />
+            );
+          })}
         </div>
       </div>
-    )
+    );
   }
 }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { resetLoading, performSearch } from '../../actions';
-import Credits from './Credits';
+import MovieCredits from './creditsComponents/MovieCredits';
 import Trailers from './Trailers';
 
 const Movie = styled.div`
@@ -46,38 +46,43 @@ class MovieDetails extends Component {
   }
 
   render() {
-    if(this.props.activeMovie.info.title === undefined) {
-      this.props.performSearch(this.props.match.params.title)
-      this.props.history.push('/search') //eventually update this to just jump to first results' page?
+    if (this.props.activeMovie.info.title === undefined) {
+      this.props.performSearch(this.props.match.params.title);
+      this.props.history.push('/search'); //eventually update this to just jump to first results' page?
     }
-     return (
+    return (
       <Movie>
         <Wrapper>
-           <PosterWrapper> 
-             <MoviePoster
-               src={`https://image.tmdb.org/t/p/original${this.props.activeMovie.info.poster_path}`}
-             />
-             <a href={this.props.activeMovie.info.homepage}>Website</a>
-           </PosterWrapper>
-           <InfoRight>
-             <div>
+          <PosterWrapper>
+            <MoviePoster
+              src={`https://image.tmdb.org/t/p/original${
+                this.props.activeMovie.info.poster_path
+              }`}
+            />
+            <a href={this.props.activeMovie.info.homepage}>Website</a>
+          </PosterWrapper>
+          <InfoRight>
+            <div>
               <h2>{this.props.activeMovie.info.title}</h2>
-               <Credits cast={this.props.activeMovie.cast} crew={this.props.activeMovie.crew} />
+              <MovieCredits
+                cast={this.props.activeMovie.cast}
+                crew={this.props.activeMovie.crew}
+              />
               <h4>{this.props.activeMovie.info.tagline}</h4>
-             </div>
-             <div>
-               <p></p>
-             </div>
-           </InfoRight>
+            </div>
+            <div>
+              <p />
+            </div>
+          </InfoRight>
         </Wrapper>
         <div>
           <p>{this.props.activeMovie.info.overview}</p>
         </div>
         <Wrapper>
-          <Trailers id={this.props.activeMovie.info.id}/>
+          <Trailers id={this.props.activeMovie.info.id} />
         </Wrapper>
       </Movie>
-    )
+    );
   }
 }
 
@@ -89,4 +94,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { resetLoading, performSearch })(MovieDetails);
+export default connect(mapStateToProps, { resetLoading, performSearch })(
+  MovieDetails
+);

@@ -1,36 +1,49 @@
 import React from 'react';
 
-import AccordianParent from './AccordianParent'
+import AccordianParent from './AccordianParent';
 
-const AccordianWrapper = (props) => {
+const AccordianWrapper = props => {
+  const department = {};
 
-  const cast = props.credits.cast;
+  if (props.credits.cast) {
+    const cast = props.credits.cast;
+    department.cast = cast;
+  }
 
-  const directing = props.credits.crew.filter(item => 
-     item.department === 'Directing' );
+  props.credits.crew.filter(item => {
+    const departmentName = item.department.toLowerCase();
+    if (!department.hasOwnProperty(departmentName)) {
+      department[departmentName] = props.credits.crew.filter(
+        innerItem => innerItem.department.toLowerCase() === departmentName
+      );
+    }
+  });
 
-  const production = props.credits.crew.filter(item => 
-    item.department === 'Production' );
+  console.log('department', department);
 
-  const writing = props.credits.crew.filter(item => 
-    item.department === 'Writing' );
+  const categoryList = Object.keys(department);
 
-  let categories = [cast, directing, production, writing];
-  
-  categories = categories.filter(item => 
-    item.length > 0
-  );
+  console.log('list', categoryList);
+  let categories = [];
+
+  categoryList.forEach(key => {
+    categories.push(department[key]);
+  });
+  console.log('categories', categories);
 
   return (
     <div>
       {categories.map(category => {
-        return <AccordianParent
-        key={category.index}
-        category={category[0].job}
-        contents={category} />
+        return (
+          <AccordianParent
+            key={category.index}
+            category={category[0].job}
+            contents={category}
+          />
+        );
       })}
     </div>
   );
-}
+};
 
 export default AccordianWrapper;
