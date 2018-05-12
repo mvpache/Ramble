@@ -19,17 +19,13 @@ const AccordianWrapper = props => {
     }
   });
 
-  console.log('department', department);
-
   const categoryList = Object.keys(department);
 
-  console.log('list', categoryList);
   let categories = [];
 
   categoryList.forEach(key => {
     categories.push(department[key]);
   });
-  console.log('categories', categories);
 
   return (
     <div>

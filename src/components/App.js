@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import NavBar from './NavBar';
 import Body from './Body';
@@ -20,11 +20,10 @@ class App extends Component {
 
 export default App;
 
+//!Features To do
 
-
-//!Features To do 
-
-//TODO: See Full Cast/Crew on a movie 
+//TODO: See Full Cast/Crew on a movie
+//see full crew link needs to be added + component
 
 //TODO: Fuller styling
 
