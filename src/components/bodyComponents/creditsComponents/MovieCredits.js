@@ -13,7 +13,11 @@ class MovieCredits extends Component {
     this.props.activatePerson(id);
   }
 
-  allCredits(id) {}
+  allCredits() {
+    this.props.history.push(
+      `/movie/${this.props.activeMovie.info.title}/credits`
+    );
+  }
 
   render() {
     if (this.props.loading === 'activePerson Loaded') {
@@ -66,7 +70,14 @@ class MovieCredits extends Component {
             );
           }
         })}
-        <p>See Full Cast & Crew</p> {/*should link to full credit comp*/}
+        <p
+          onClick={() => {
+            this.allCredits(); //need to pass in ID
+          }}
+        >
+          See Full Cast & Crew
+        </p>{' '}
+        {/*should link to full credit comp*/}
       </div>
     );
   }
@@ -75,6 +86,7 @@ class MovieCredits extends Component {
 const mapStateToProps = state => {
   return {
     activePerson: state.activePerson,
+    activeMovie: state.activeMovie,
     error: state.error,
     loading: state.loading,
   };

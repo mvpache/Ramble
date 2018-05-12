@@ -12,73 +12,87 @@ const movie = {
   info: {},
   cast: [],
   crew: [],
-}
+};
 
 const person = {
   info: {},
   credits: {},
-}
-
-export const performSearch = (searchTerm) => dispatch => {
-  dispatch({ type: LOADING });
-
-  axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=1&include_adult=false`)
-  .then(response => {
-    dispatch({ type: SEARCH_SUCESSFUL, payload: response.data})
-  })
-  .catch(response => {
-    dispatch({ type: ERROR, message: 'Error with Search' })
-  });
 };
 
-export const activateMovie = (id) => dispatch => {
-    dispatch({ type: LOADING });
+export const performSearch = searchTerm => dispatch => {
+  dispatch({ type: LOADING });
 
-    axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`)
-      .then(response => {
-        movie.info = response.data;
-        axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`)
-          .then(response => {
-            movie.cast = response.data.cast;
-            movie.crew = response.data.crew;
-            dispatch({ type: ACTIVATE_MOVIE, payload: movie })
-          })
-          .catch(response => {
-            dispatch({ type: ERROR, message: 'Error with Credit GET' })
-          })
+  axios
+    .get(
+      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
+    )
+    .then(response => {
+      dispatch({ type: SEARCH_SUCESSFUL, payload: response.data });
+    })
+    .catch(response => {
+      dispatch({ type: ERROR, message: 'Error with Search' });
+    });
+};
+
+export const activateMovie = id => dispatch => {
+  dispatch({ type: LOADING });
+
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
+    )
+    .then(response => {
+      movie.info = response.data;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
+        )
+        .then(response => {
+          movie.cast = response.data.cast;
+          movie.crew = response.data.crew;
+          dispatch({ type: ACTIVATE_MOVIE, payload: movie });
         })
-      .catch(response => {
-        dispatch({ type: ERROR, message: 'Error with Activating Movie' })
-  });
+        .catch(response => {
+          dispatch({ type: ERROR, message: 'Error with Credit GET' });
+        });
+    })
+    .catch(response => {
+      dispatch({ type: ERROR, message: 'Error with Activating Movie' });
+    });
 };
 
-export const activatePerson = (id) => dispatch => {
+export const activatePerson = id => dispatch => {
   dispatch({ type: LOADING });
 
-  axios.get(`https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}&language=en-US`)
-  .then(response => {
-    person.info = response.data;
-    axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${apiKey}&language=en-US`)
-      .then(response => {
-        person.credits = response.data;
-        dispatch({ type: ACTIVATE_PERSON, payload: person })
-      })
-      .catch(response => {
-        dispatch({ type: ERROR, payload: 'Error with credit GET' })
-      })
-  })
-  .catch(response => {
-    dispatch({ type: ERROR, payload: 'Error with Activating Person' })
-  }) 
-}
+  axios
+    .get(
+      `https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}&language=en-US`
+    )
+    .then(response => {
+      person.info = response.data;
+      axios
+        .get(
+          `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${apiKey}&language=en-US`
+        )
+        .then(response => {
+          person.credits = response.data;
+          dispatch({ type: ACTIVATE_PERSON, payload: person });
+        })
+        .catch(response => {
+          dispatch({ type: ERROR, payload: 'Error with credit GET' });
+        });
+    })
+    .catch(response => {
+      dispatch({ type: ERROR, payload: 'Error with Activating Person' });
+    });
+};
 
 export const resetLoading = () => {
   return {
     type: RESET_LOADING,
-    payload: false
+    payload: false,
   };
-}
-
+};
 
 /*need a search AC using 
 https://developers.themoviedb.org/3/search/search-movies
