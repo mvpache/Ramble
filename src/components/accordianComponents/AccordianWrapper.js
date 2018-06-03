@@ -9,6 +9,7 @@ const AccordianWrapper = props => {
     const cast = props.credits.cast;
     department.cast = cast;
   }
+  //need to change so that determines if it should use {props.credits.crew} or {props.credits.credits}
 
   props.credits.crew.filter(item => {
     const departmentName = item.department.toLowerCase();

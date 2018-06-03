@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { activateMovie } from '../../actions';
+import { activateMovie, activatePerson } from '../../actions';
 import AccordianChild from './AccordianChild';
 
 class AccordianParent extends Component {
@@ -14,12 +14,53 @@ class AccordianParent extends Component {
     };
   }
 
-  activate(id) {
-    this.props.activateMovie(id);
+  activate(item) {
+    if (item.title) {
+      this.props.activateMovie(item.id);
+    }
+    if (item.name) {
+      this.props.activatePerson(item.id);
+    }
   }
 
   toggleShow() {
     this.setState({ show: !this.state.show });
+  }
+
+  //write function for logic on what to do display
+  titleOfAccordian() {
+    if (this.props.category) {
+      return (
+        <h3
+          onClick={() => {
+            this.toggleShow();
+          }}
+        >
+          {this.props.category}:{' '}
+        </h3>
+      );
+    } else if (this.props.contents[0].cast_id) {
+      //should display "Starring whoever as whatever"
+      return (
+        <h3
+          onClick={() => {
+            this.toggleShow();
+          }}
+        >
+          Starring:{' '}
+        </h3>
+      );
+    } else {
+      return (
+        <h3
+          onClick={() => {
+            this.toggleShow();
+          }}
+        >
+          Appeared in:{' '}
+        </h3>
+      );
+    }
   }
 
   render() {
@@ -28,32 +69,14 @@ class AccordianParent extends Component {
     }
     return (
       <div>
-        {' '}
-        {/* for each parent either display the category title or "appeared in*/}
-        {this.props.category ? (
-          <h3
-            onClick={() => {
-              this.toggleShow();
-            }}
-          >
-            {this.props.category}:{' '}
-          </h3>
-        ) : (
-          <h3
-            onClick={() => {
-              this.toggleShow();
-            }}
-          >
-            Appeared in:{' '}
-          </h3>
-        )}
+        {this.titleOfAccordian()}
         <div style={{ display: this.state.show ? 'inherit' : 'none' }}>
-          {this.props.contents.map(movie => {
+          {this.props.contents.map(item => {
             return (
               <AccordianChild
-                key={movie.index}
-                movie={movie}
-                activate={() => this.activate(movie.id)}
+                key={item.index}
+                item={item}
+                activate={() => this.activate(item)}
               />
             );
           })}
@@ -72,5 +95,5 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { activateMovie })(AccordianParent)
+  connect(mapStateToProps, { activateMovie, activatePerson })(AccordianParent)
 );
