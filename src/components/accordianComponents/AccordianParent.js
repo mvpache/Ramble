@@ -27,7 +27,6 @@ class AccordianParent extends Component {
     this.setState({ show: !this.state.show });
   }
 
-  //write function for logic on what to do display
   titleOfAccordian() {
     if (this.props.category) {
       return (

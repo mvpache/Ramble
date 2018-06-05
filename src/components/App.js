@@ -22,9 +22,6 @@ export default App;
 
 //!Features To do
 
-//TODO: See Full Cast/Crew on a movie
-//see full crew link needs to be added + component
-
 //TODO: Fuller styling
 
 //TODO: Component unmount to deactivate movie/person
@@ -38,3 +35,5 @@ export default App;
 //TODO: Click on poster to see a larger version/or take you to poster viewer
 
 //TODO: if no active movie(didn't arrive by link) grab movie based on URL
+
+//TODO: Start the backend finally

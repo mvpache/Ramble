@@ -21,6 +21,7 @@ class Body extends Component {
   render() {
     return (
       <Wrapper>
+        {/*insert loading animation/page here*/}
         <Route path="/person/:name" component={PersonDetails} />
         <Route exact path="/movie/:title/credits" component={FullCredits} />
         <Route exact path="/movie/:title" component={MovieDetails} />

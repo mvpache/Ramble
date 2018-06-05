@@ -9,13 +9,13 @@ const AccordianWrapper = props => {
     const cast = props.credits.cast;
     department.cast = cast;
   }
-  //need to change so that determines if it should use {props.credits.crew} or {props.credits.credits}
 
   props.credits.crew.filter(item => {
     const departmentName = item.department.toLowerCase();
     if (!department.hasOwnProperty(departmentName)) {
+      //check if department is in the list
       department[departmentName] = props.credits.crew.filter(
-        innerItem => innerItem.department.toLowerCase() === departmentName
+        innerItem => innerItem.department.toLowerCase() === departmentName //if it isn't on the list, assign that department to the credit with it
       );
     }
   });
@@ -25,12 +25,13 @@ const AccordianWrapper = props => {
   let categories = [];
 
   categoryList.forEach(key => {
-    categories.push(department[key]);
+    categories.push(department[key]); //make a list of departments
   });
 
   return (
     <div>
       {categories.map(category => {
+        //assign each department a accordian parent
         return (
           <AccordianParent
             key={category.index}
