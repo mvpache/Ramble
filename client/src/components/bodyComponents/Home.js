@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import { apiKey } from '../../config';
 import MovieLink from './MovieLink';
+
+const apiKey = process.env.apiKey;
 
 const Movies = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ class Home extends Component {
 
   componentDidMount() {
     //axios get call to get moviesOutnow
+    //refactor into action
     axios
       .get(
         `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1&region=US`

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiKey } from '../config';
+const apiKey = process.env.apiKey;
 
 export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';
