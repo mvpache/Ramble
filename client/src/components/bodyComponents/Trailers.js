@@ -15,7 +15,6 @@ class Trailers extends Component {
   }
 
   componentDidMount() {
-    console.log(process.env.APIKEY);
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${
