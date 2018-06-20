@@ -24,7 +24,7 @@ class NavBar extends Component {
             this.props.history.push('/');
           }}
         >
-          {process.env.APIKEY}
+          Movie Ramble
         </Title>
         <Search />
       </Wrapper>
