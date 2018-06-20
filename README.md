@@ -25,3 +25,5 @@ comments(array of comments)
 }
 
 NEED: some kind of schema for ratings as they will need to be accessed by users, and aggregated by a movie's page
+
+START: get a basic get route, connect it to an mlab account
