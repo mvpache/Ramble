@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import MovieLink from './MovieLink';
 
-const apiKey = process.env.apiKey;
+const apiKey = process.env.APIKEY;
 
 const Movies = styled.div`
   display: flex;

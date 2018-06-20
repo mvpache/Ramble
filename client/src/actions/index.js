@@ -1,5 +1,5 @@
 import axios from 'axios';
-const apiKey = process.env.apiKey;
+const apiKey = process.env.APIKEY;
 
 export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';

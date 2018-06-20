@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 
-const apiKey = process.env.apiKey;
+const apiKey = process.env.APIKEY;
 
 class Trailers extends Component {
   constructor(props) {
