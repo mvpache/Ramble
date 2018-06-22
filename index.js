@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 
+const movieRouter = require('./server/movie_routes');
+
 const app = express();
 
 // Serve static files from the React app
@@ -16,7 +18,7 @@ app.use(
 );
 app.options('*', cors());
 //!!routes go here
-
+app.use(movieRouter);
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
