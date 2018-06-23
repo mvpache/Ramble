@@ -24,7 +24,7 @@ export const performSearch = searchTerm => dispatch => {
   dispatch({ type: LOADING });
 
   axios
-    .get(`${url}/api/search/${searchTerm}`)
+    .get(`${url}/api/search/`, { searchTerm })
     .then(response => {
       dispatch({ type: SEARCH_SUCESSFUL, payload: response.data });
     })
