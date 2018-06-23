@@ -1,5 +1,5 @@
 import axios from 'axios';
-const apiKey = process.env.APIKEY;
+const url = 'https://ramble-app.herokuapp.com';
 
 export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';
@@ -23,9 +23,7 @@ export const performSearch = searchTerm => dispatch => {
   dispatch({ type: LOADING });
 
   axios
-    .get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
-    )
+    .get(`${url}/api/search/${searchTerm}`)
     .then(response => {
       dispatch({ type: SEARCH_SUCESSFUL, payload: response.data });
     })

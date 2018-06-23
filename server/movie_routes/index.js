@@ -14,4 +14,25 @@ router.route('/api/nowplaying').get((req, res) => {
     .pipe(res);
 });
 
+router.route('/api/upcoming').get((req, res) => {
+  request
+    .get(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1&region=US`
+    )
+    .pipe(res);
+});
+
+router.route('/api/search/:searchTerm').get((req, res) => {
+  request
+    .get(
+      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
+    )
+    .pipe(res);
+});
+
+//activateMovie
+//movieCredits
+//activatePerson
+//personCredits
+
 module.exports = router;

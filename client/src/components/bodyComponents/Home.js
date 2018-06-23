@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import MovieLink from './MovieLink';
 
-const apiKey = process.env.APIKEY;
+const url = 'https://ramble-app.herokuapp.com';
 
 const Movies = styled.div`
   display: flex;
@@ -27,21 +27,15 @@ class Home extends Component {
   componentDidMount() {
     //axios get call to get moviesOutnow
     //refactor into action
-    axios
-      .get(`https://ramble-app.herokuapp.com/api/nowplaying`)
-      .then(response => {
-        const sixMovies = response.data.results.slice(0, 6);
-        this.setState({ outNow: sixMovies });
-      });
+    axios.get(`${url}/api/nowplaying`).then(response => {
+      const sixMovies = response.data.results.slice(0, 6);
+      this.setState({ outNow: sixMovies });
+    });
 
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1&region=US`
-      )
-      .then(response => {
-        const threeMovies = response.data.results.slice(0, 3);
-        this.setState({ comingSoon: threeMovies });
-      }); //might have to filter out lower popular titles?
+    axios.get(`${url}/api/upcoming`).then(response => {
+      const threeMovies = response.data.results.slice(0, 3);
+      this.setState({ comingSoon: threeMovies });
+    }); //might have to filter out lower popular titles?
   }
 
   render() {
