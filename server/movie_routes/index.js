@@ -23,7 +23,7 @@ router.route('/api/upcoming').get((req, res) => {
 });
 
 router.route('/api/search/').get((req, res) => {
-  const searchTerm = req.searchTerm;
+  const searchTerm = req.params.search;
   request
     .get(
       `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchTerm}&page=1&include_adult=false`

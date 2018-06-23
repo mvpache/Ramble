@@ -26,4 +26,6 @@ comments(array of comments)
 
 NEED: some kind of schema for ratings as they will need to be accessed by users, and aggregated by a movie's page
 
-START: get a basic get route, connect it to an mlab account
+START: get a basic get route,
+THEN: Move all your actions/gets from FE to the server
+LATER: Mlab connection & those get routes
