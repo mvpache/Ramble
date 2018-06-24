@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 
-const apiKey = process.env.APIKEY;
+const url = 'https://ramble-app.herokuapp.com';
 
 class Trailers extends Component {
   constructor(props) {
@@ -15,12 +15,8 @@ class Trailers extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${
-          this.props.id
-        }/videos?api_key=${apiKey}&language=en-US`
-      )
+    axios //refactor as action
+      .get(`${url}/api/trailer/${this.props.videoId}`)
       .then(response =>
         this.setState({ loaded: true, response: response.data })
       )
