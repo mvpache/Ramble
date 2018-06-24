@@ -37,7 +37,7 @@ export const performSearch = searchTerm => dispatch => {
 
 export const activateMovie = id => dispatch => {
   dispatch({ type: LOADING });
-
+  console.log(id);
   axios
     .get(`${url}/api/activate/movie/${id}`)
     .then(response => {
