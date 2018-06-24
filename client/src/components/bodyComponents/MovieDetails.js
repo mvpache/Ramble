@@ -94,6 +94,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { resetLoading, performSearch })(
-  MovieDetails
-);
+export default connect(
+  mapStateToProps,
+  { resetLoading, performSearch }
+)(MovieDetails);

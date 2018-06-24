@@ -16,7 +16,7 @@ class Trailers extends Component {
 
   componentDidMount() {
     axios //refactor as action
-      .get(`${url}/api/trailer/${this.props.videoId}`)
+      .get(`${url}/api/trailer/${this.props.id}`)
       .then(response =>
         this.setState({ loaded: true, response: response.data })
       )
