@@ -14,8 +14,8 @@ const MovieImage = styled.img`
 
 class MovieLink extends Component {
   activate() {
-    console.log('isnide movielink', this.props.id);
-    this.props.activateMovie(this.props.id);
+    console.log('isnide movielink', this.props.movie.id);
+    this.props.activateMovie(this.props.movie.id);
   }
 
   render() {
