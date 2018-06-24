@@ -1,6 +1,8 @@
 import axios from 'axios';
-const url = 'https://ramble-app.herokuapp.com';
-const apiKey = 'https://ramble-app.herokuapp.com'; //placeholder
+const url =
+  process.env.NODE_ENV === 'production'
+    ? 'https://ramble-app.herokuapp.com'
+    : 'http://localhost:5000';
 
 export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';
@@ -37,15 +39,11 @@ export const activateMovie = id => dispatch => {
   dispatch({ type: LOADING });
 
   axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
-    )
+    .get(`${url}/api/activate/movie/${id}`)
     .then(response => {
       movie.info = response.data;
       axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
-        )
+        .get(`${url}/api/activate/movie/credits/${id}`)
         .then(response => {
           movie.cast = response.data.cast;
           movie.crew = response.data.crew;
@@ -64,15 +62,11 @@ export const activatePerson = id => dispatch => {
   dispatch({ type: LOADING });
 
   axios
-    .get(
-      `https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}&language=en-US`
-    )
+    .get(`${url}/api/activate/person/${id}`)
     .then(response => {
       person.info = response.data;
       axios
-        .get(
-          `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${apiKey}&language=en-US`
-        )
+        .get(`${url}/api/activate/person/credits/${id}`)
         .then(response => {
           person.credits = response.data;
           dispatch({ type: ACTIVATE_PERSON, payload: person });

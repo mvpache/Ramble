@@ -28,7 +28,7 @@ class Home extends Component {
     //axios get call to get moviesOutnow
     //refactor into action
     axios.get(`${url}/api/nowplaying`).then(response => {
-      const sixMovies = response.data.results.slice(0, 6); //slices first six(usually the mos popular)
+      const sixMovies = response.data.results.slice(0, 6); //slices first six(usually the most popular)
       this.setState({ outNow: sixMovies });
     });
 

@@ -4,7 +4,7 @@ const request = require('request');
 //this is where all the passively displayed contect goes
 
 const router = express.Router();
-const apiKey = process.env.APIKEY;
+const apiKey = process.env.APIKEY || require('../../client/src/config');
 
 router.route('/api/nowplaying').get((req, res) => {
   request
@@ -31,9 +31,40 @@ router.route('/api/search/:id').get((req, res) => {
     .pipe(res);
 });
 
-//activateMovie
-//movieCredits
-//activatePerson
-//personCredits
+router.route('/api/activate/movie/:id').get((req, res) => {
+  const movieID = req.params.id;
+  request
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`
+    )
+    .pipe(res);
+});
+
+router.route('/api/activate/movie/credits/:id').get((req, res) => {
+  const movieID = req.params.id;
+  request
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${apiKey}`
+    )
+    .pipe(res);
+});
+
+router.route('/api/activate/person/:id').get((req, res) => {
+  const personID = req.params.id;
+  request
+    .get(
+      `https://api.themoviedb.org/3/person/${personID}?api_key=${apiKey}&language=en-US`
+    )
+    .pipe(res);
+});
+
+router.route('/api/activate/person/credits/:id').get((req, res) => {
+  const personID = req.params.id;
+  request
+    .get(
+      `https://api.themoviedb.org/3/person/${personID}/movie_credits?api_key=${apiKey}&language=en-US`
+    )
+    .pipe(res);
+});
 
 module.exports = router;

@@ -8,8 +8,8 @@ import { activateMovie } from '../../actions';
 const MovieImage = styled.img`
   margin: 2%;
   display: inline-block;
-  width: 130px;
-  height: 197px;
+  width: 120px;
+  height: 182px;
 `;
 
 class MovieLink extends Component {
@@ -42,5 +42,8 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { activateMovie })(MovieLink)
+  connect(
+    mapStateToProps,
+    { activateMovie }
+  )(MovieLink)
 );
