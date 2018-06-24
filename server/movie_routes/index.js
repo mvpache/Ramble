@@ -67,4 +67,13 @@ router.route('/api/activate/person/credits/:id').get((req, res) => {
     .pipe(res);
 });
 
+router.route('/api/trailer/:id').get((req, res) => {
+  const movieID = req.params.id;
+  request
+    .get(
+      `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey}&language=en-US`
+    )
+    .pipe(res);
+});
+
 module.exports = router;
