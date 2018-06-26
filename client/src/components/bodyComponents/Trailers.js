@@ -37,7 +37,7 @@ class Trailers extends Component {
     return (
       <div>
         {this.state.loaded ? (
-          <YouTube opts={opts} videoId={this.state.response.results[0].key} />
+          <YouTube opts={opts} videoId={this.state.response.results[0].key} /> //need logic for no results
         ) : (
           'Loading'
         )}
