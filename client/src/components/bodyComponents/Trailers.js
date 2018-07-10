@@ -26,6 +26,15 @@ class Trailers extends Component {
   }
 
   results() {
+    const opts = {
+      height: '268',
+      width: '440',
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: 0,
+      },
+    };
+
     if (this.state.loaded) {
       if (this.state.response.results.length > 0) {
         return (
@@ -40,14 +49,6 @@ class Trailers extends Component {
   }
 
   render() {
-    const opts = {
-      height: '268',
-      width: '440',
-      playerVars: {
-        // https://developers.google.com/youtube/player_parameters
-        autoplay: 0,
-      },
-    };
     return (
       <div>
         {results()}
