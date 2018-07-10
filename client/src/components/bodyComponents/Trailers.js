@@ -25,7 +25,7 @@ class Trailers extends Component {
       );
   }
 
-  results() {
+  render() {
     const opts = {
       height: '268',
       width: '440',
@@ -34,7 +34,6 @@ class Trailers extends Component {
         autoplay: 0,
       },
     };
-
     if (this.state.loaded) {
       if (this.state.response.results.length > 0) {
         return (
@@ -46,19 +45,6 @@ class Trailers extends Component {
     } else {
       return <h1>'Loading'</h1>;
     }
-  }
-
-  render() {
-    return (
-      <div>
-        {results()}
-        {/* {this.state.loaded ? (
-          <YouTube opts={opts} videoId={this.state.response.results[0].key} /> //need logic for no results
-        ) : (
-          'Loading'
-        )} */}
-      </div>
-    );
   }
 }
 
