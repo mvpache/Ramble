@@ -24,6 +24,7 @@ class MovieCredits extends Component {
       this.props.history.push(`/person/${this.props.activePerson.info.name}`);
     }
     return (
+      // if no writer, directed listed, don't display
       <div>
         Directed by:{' '}
         {this.props.crew.map(item => {
@@ -33,8 +34,7 @@ class MovieCredits extends Component {
                 key={item.id}
                 onClick={() => {
                   this.activate(item.id);
-                }}
-              >
+                }}>
                 {item.name}
               </p>
             );
@@ -48,8 +48,7 @@ class MovieCredits extends Component {
                 key={item.id}
                 onClick={() => {
                   this.activate(item.id);
-                }}
-              >
+                }}>
                 {item.name}
               </p>
             );
@@ -63,8 +62,7 @@ class MovieCredits extends Component {
                 key={item.id}
                 onClick={() => {
                   this.activate(item.id);
-                }}
-              >
+                }}>
                 {item.name}
               </p>
             );
@@ -73,8 +71,7 @@ class MovieCredits extends Component {
         <p
           onClick={() => {
             this.allCredits(); //need to pass in ID
-          }}
-        >
+          }}>
           See Full Cast & Crew
         </p>{' '}
         {/*should link to full credit comp*/}
@@ -93,5 +90,8 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { activatePerson })(MovieCredits)
+  connect(
+    mapStateToProps,
+    { activatePerson }
+  )(MovieCredits)
 );

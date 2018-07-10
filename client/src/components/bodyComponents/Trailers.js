@@ -25,6 +25,20 @@ class Trailers extends Component {
       );
   }
 
+  results() {
+    if (this.state.loaded) {
+      if (this.state.response.results.length > 0) {
+        return (
+          <YouTube opts={opts} videoId={this.state.response.results[0].key} />
+        );
+      } else {
+        return <h1>'No Trailer'</h1>;
+      }
+    } else {
+      return <h1>'Loading'</h1>;
+    }
+  }
+
   render() {
     const opts = {
       height: '268',
@@ -36,11 +50,12 @@ class Trailers extends Component {
     };
     return (
       <div>
-        {this.state.loaded ? (
+        {results()}
+        {/* {this.state.loaded ? (
           <YouTube opts={opts} videoId={this.state.response.results[0].key} /> //need logic for no results
         ) : (
           'Loading'
-        )}
+        )} */}
       </div>
     );
   }
