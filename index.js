@@ -7,6 +7,7 @@ const movieRouter = require('./server/movie_routes');
 const userRouter = require('./server/users/userRoutes');
 
 const app = express();
+app.use(express.json());
 
 const corsOptions = {
   origin: ('https://ramble-app.herokuapp.com', 'http://localhost:5000'),

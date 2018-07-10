@@ -24,13 +24,14 @@ const makeToken = user => {
 };
 
 const localStrategy = new LocalStrategy(function(username, password, done) {
+  console.log('inside local', username, password);
   User.findOne({ username }, function(err, user) {
     if (err) {
       return done(err);
     }
 
     if (!user) {
-      done(null, false); //no user found
+      return done(null, false); //no user found
     }
 
     user.verifyPassword(password, function(err, isValid) {
@@ -39,10 +40,10 @@ const localStrategy = new LocalStrategy(function(username, password, done) {
       }
 
       if (isValid) {
-        const { _id, username, race } = user; //destrucure off user
-        return done(null, { _id, username, race });
+        const { _id, username } = user; //destrucure off user
+        return done(null, { _id, username });
       }
-      return done(null, user);
+      return done(null, false);
     });
   });
 });
@@ -68,6 +69,7 @@ const jwtStrategy = new JwtStrategy(jwtOptions, function(payload, done) {
 });
 
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 const authenticate = passport.authenticate('local', { session: false }); //local refers to LocalStrategy class - used for login(docs for LocalStrategy define this)
 const protected = passport.authenticate('jwt', { session: false });
@@ -78,9 +80,15 @@ router.route('/register').post((req, res) => {
   const user = new User(credentials); //need username and pass
   user.save().then(inserted => {
     const token = makeToken(inserted);
-    9;
     res.status(201).json({ token });
   });
+});
+
+router.use(authenticate);
+
+router.route('/login').post((req, res) => {
+  console.log('inside login');
+  res.json({ token: makeToken(req.body.username), user: req.body.username });
 });
 
 //register
