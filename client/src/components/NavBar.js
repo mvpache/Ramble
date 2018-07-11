@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import Search from './navComponents/Search';
 
@@ -22,11 +22,12 @@ class NavBar extends Component {
         <Title
           onClick={() => {
             this.props.history.push('/');
-          }}
-        >
+          }}>
           Movie Ramble
         </Title>
         <Search />
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Sign Up</Link>
       </Wrapper>
     );
   }

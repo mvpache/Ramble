@@ -10,12 +10,10 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: ('https://ramble-app.herokuapp.com', 'http://localhost:5000'),
+  origin: ('https://ramble-app.herokuapp.com', 'http://localhost:3000'),
   credentials: true,
   methods: ['GET', 'PUT', 'POST'],
 };
-
-//TODO connect to MLAB
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
