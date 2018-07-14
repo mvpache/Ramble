@@ -6,10 +6,6 @@ import { activatePerson } from '../../../actions';
 import AccordianWrapper from '../../accordianComponents/AccordianWrapper';
 
 class FullCredits extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   activate(id) {
     this.props.activatePerson(id);
   }
@@ -27,15 +23,16 @@ class FullCredits extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    activeMovie: state.activeMovie,
-    activePerson: state.activePerson,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activeMovie: state.activeMovie,
+  activePerson: state.activePerson,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default withRouter(
-  connect(mapStateToProps, { activatePerson })(FullCredits)
+  connect(
+    mapStateToProps,
+    { activatePerson },
+  )(FullCredits),
 );

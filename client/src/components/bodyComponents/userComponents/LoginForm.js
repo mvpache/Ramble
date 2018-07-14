@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-// TODO feedback for signing up correctly
-// thinking component either displays subCo A or B depending on "sucess" status
 const url = process.env.NODE_ENV === 'production'
   ? 'https://ramble-app.herokuapp.com'
   : 'http://localhost:5000';
 
-class SignUpForm extends Component {
+class LoginForm extends Component {
   constructor() {
     super();
 
@@ -26,7 +24,7 @@ class SignUpForm extends Component {
     event.preventDefault();
 
     axios
-      .post(`${url}/api/user/auth/register`, this.state)
+      .post(`${url}/api/user/auth/login`, this.state)
       .then((response) => {
         this.props.setSucess(true);
         console.log('response', response.data);
@@ -58,10 +56,10 @@ class SignUpForm extends Component {
             type="text"
           />
         </div>
-        <button>Sign Up</button>
+        <button>Login</button>
       </form>
     );
   }
 }
 
-export default SignUpForm;
+export default LoginForm;

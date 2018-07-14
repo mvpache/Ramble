@@ -25,17 +25,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    //axios get call to get moviesOutnow
-    //refactor into action
-    axios.get(`${url}/api/nowplaying`).then(response => {
-      const sixMovies = response.data.results.slice(0, 6); //slices first six(usually the most popular)
+    // axios get call to get moviesOutnow
+    // refactor into action
+    axios.get(`${url}/api/nowplaying`).then((response) => {
+      const sixMovies = response.data.results.slice(0, 6);
+      // slices first six(usually the most popular)
       this.setState({ outNow: sixMovies });
     });
 
-    axios.get(`${url}/api/upcoming`).then(response => {
+    axios.get(`${url}/api/upcoming`).then((response) => {
       const threeMovies = response.data.results.slice(0, 3);
       this.setState({ comingSoon: threeMovies });
-    }); //might have to filter out lower popular titles?
+    }); // might have to filter out lower popular titles?
   }
 
   render() {
@@ -43,15 +44,15 @@ class Home extends Component {
       <Wrapper>
         <h2>Now Playing...</h2>
         <Movies>
-          {this.state.outNow.map(movie => {
-            return <MovieLink key={movie.id} movie={movie} />;
-          })}
+          {this.state.outNow.map(movie => (
+            <MovieLink key={movie.id} movie={movie} />
+          ))}
         </Movies>
         <h2>Coming Soon...</h2>
         <Movies>
-          {this.state.comingSoon.map(movie => {
-            return <MovieLink key={movie.id} movie={movie} />;
-          })}
+          {this.state.comingSoon.map(movie => (
+            <MovieLink key={movie.id} movie={movie} />
+          ))}
         </Movies>
       </Wrapper>
     );

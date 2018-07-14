@@ -14,13 +14,13 @@ class Search extends Component {
   }
 
   handleInput = (event) => {
-    this.setState({ searchValue: event.target.value })
+    this.setState({ searchValue: event.target.value });
   };
 
   submitSearch = (event) => {
     event.preventDefault();
     this.props.performSearch(this.state.searchValue);
-    this.props.history.push('/search')
+    this.props.history.push('/search');
   }
 
   render() {
@@ -30,16 +30,14 @@ class Search extends Component {
             onChange={this.handleInput}
             placeholder="Search..." />
         </form>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    searchResults: state.searchResults,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  searchResults: state.searchResults,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default withRouter(connect(mapStateToProps, { performSearch })(Search));

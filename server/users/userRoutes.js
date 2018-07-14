@@ -1,99 +1,38 @@
-const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const LocalStrategy = require('passport-local'); //plugin for handling authentication
 const { ExtractJwt } = require('passport-jwt');
-const JwtStrategy = require('passport-jwt').Strategy;
 const express = require('express');
+const JwtStrategy = require('passport-jwt').Strategy;
 
 const User = require('../users/User');
-const secret = process.env.SECRET || require('../config').secret;
+const configSecret = require('../config').secret;
+
+const secret = process.env.SECRET || configSecret;
+
 const router = express.Router();
-
-const makeToken = user => {
-  // uses data to make token
-  const timestamp = new Date().getTime();
-  const payload = {
-    sub: user._id, //who the token is about(subject)
-    iat: timestamp, //issued at time
-    username: user.username,
-    race: user.race,
-    //any other info from user
-  };
-  const options = { expiresIn: '12h' }; //has a bunch of stuff, most important for now is exp date
-  return jwt.sign(payload, secret, options); //return token after creation
-};
-
-const localStrategy = new LocalStrategy(function(username, password, done) {
-  console.log('inside local', username, password);
-  User.findOne({ username }, function(err, user) {
-    if (err) {
-      return done(err);
-    }
-
-    if (!user) {
-      return done(null, false); //no user found
-    }
-
-    user.verifyPassword(password, function(err, isValid) {
-      if (err) {
-        return done(err);
-      }
-
-      if (isValid) {
-        const { _id, username } = user; //destrucure off user
-        return done(null, { _id, username });
-      }
-      return done(null, false);
-    });
-  });
-});
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: secret,
 };
 
-const jwtStrategy = new JwtStrategy(jwtOptions, function(payload, done) {
+const jwtStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
   User.findById(payload.sub)
-    .select('-password') //don't select password prop on user
-    .then(user => {
+    .select('-password') // don't select password prop on user
+    .then((user) => {
       if (user) {
         done(null, user);
       } else {
         done(null, false);
       }
     })
-    .catch(err => {
-      return done(err, false);
-    });
+    .catch(err => done(err, false));
 });
 
-passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-const authenticate = passport.authenticate('local', { session: false }); //local refers to LocalStrategy class - used for login(docs for LocalStrategy define this)
-const protected = passport.authenticate('jwt', { session: false });
-//use jwt strategy to check if token present
+const protectedRoute = passport.authenticate('jwt', { session: false });
+// use jwt strategy to check if token present
 
-router.route('/register').post((req, res) => {
-  const credentials = req.body;
-  const user = new User(credentials); //need username and pass
-  user.save().then(inserted => {
-    const token = makeToken(inserted);
-    res.status(201).json({ token });
-  });
-});
+router.use(protectedRoute);
 
-router.use(authenticate);
-
-router.route('/login').post((req, res) => {
-  console.log('inside login');
-  res.json({ token: makeToken(req.body.username), user: req.body.username });
-});
-
-//register
-//login
-//add review
-//get reviews
-
-module.exports = router;
+r;

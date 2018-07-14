@@ -1,8 +1,8 @@
 import axios from 'axios';
-const url =
-  process.env.NODE_ENV === 'production'
-    ? 'https://ramble-app.herokuapp.com'
-    : 'http://localhost:5000';
+
+const url = process.env.NODE_ENV === 'production'
+  ? 'https://ramble-app.herokuapp.com'
+  : 'http://localhost:5000';
 
 export const SEARCH_SUCESSFUL = 'SEARCH_SUCESSFUL';
 export const LOADING = 'LOADING';
@@ -22,75 +22,73 @@ const person = {
   credits: {},
 };
 
-export const performSearch = searchTerm => dispatch => {
+export const performSearch = searchTerm => (dispatch) => {
   dispatch({ type: LOADING });
 
   axios
     .get(`${url}/api/search/${searchTerm}`)
-    .then(response => {
+    .then((response) => {
       dispatch({ type: SEARCH_SUCESSFUL, payload: response.data });
     })
-    .catch(response => {
+    .catch((response) => {
       dispatch({ type: ERROR, message: 'Error with Search' });
     });
 };
 
-export const activateMovie = id => dispatch => {
+export const activateMovie = id => (dispatch) => {
   dispatch({ type: LOADING });
   console.log('isnide action', id);
   axios
     .get(`${url}/api/activate/movie/${id}`)
-    .then(response => {
+    .then((response) => {
       movie.info = response.data;
       axios
         .get(`${url}/api/activate/movie/credits/${id}`)
-        .then(response => {
+        .then((response) => {
           movie.cast = response.data.cast;
           movie.crew = response.data.crew;
           dispatch({ type: ACTIVATE_MOVIE, payload: movie });
         })
-        .catch(response => {
+        .catch((response) => {
           dispatch({ type: ERROR, message: 'Error with Credit GET' });
         });
     })
-    .catch(response => {
+    .catch((response) => {
       dispatch({ type: ERROR, message: 'Error with Activating Movie' });
     });
 };
 
-export const activatePerson = id => dispatch => {
+export const activatePerson = id => (dispatch) => {
   dispatch({ type: LOADING });
 
   axios
     .get(`${url}/api/activate/person/${id}`)
-    .then(response => {
+    .then((response) => {
       person.info = response.data;
       axios
         .get(`${url}/api/activate/person/credits/${id}`)
-        .then(response => {
+        .then((response) => {
           person.credits = response.data;
           dispatch({ type: ACTIVATE_PERSON, payload: person });
         })
-        .catch(response => {
+        .catch((response) => {
           dispatch({ type: ERROR, payload: 'Error with credit GET' });
         });
     })
-    .catch(response => {
+    .catch((response) => {
       dispatch({ type: ERROR, payload: 'Error with Activating Person' });
     });
 };
 
-export const resetLoading = () => {
-  return {
-    type: RESET_LOADING,
-    payload: false,
-  };
-};
+export const resetLoading = () => ({
+  type: RESET_LOADING,
+  payload: false,
+});
 
-/*need a search AC using 
+/* need a search AC using
 https://developers.themoviedb.org/3/search/search-movies
 
-also possible to do a key word search using 
+also possible to do a key word search using
 https://developers.themoviedb.org/3/search/search-keywords
 
 keywords could be wonky, but allow more options

@@ -22,7 +22,7 @@ class Body extends Component {
   render() {
     return (
       <Wrapper>
-        {/*insert loading animation/page here*/}
+        {/* insert loading animation/page here */}
         <Route path="/person/:name" component={PersonDetails} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import MovieLink from './MovieLink';
 import AccordianWrapper from '../accordianComponents/AccordianWrapper';
 
 const PersonPic = styled.img`
@@ -12,23 +11,7 @@ const PersonPic = styled.img`
   height: 328px;
 `;
 
-const Movies = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const MovieCredit = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 133px;
-  margin: 2%;
-`;
-
 class PersonDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
@@ -48,12 +31,10 @@ class PersonDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    activePerson: state.activePerson,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activePerson: state.activePerson,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default connect(mapStateToProps)(PersonDetails);

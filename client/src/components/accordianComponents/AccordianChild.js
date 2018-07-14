@@ -1,7 +1,6 @@
 import React from 'react';
 
-const AccordianChild = props => {
-  return (
+const AccordianChild = props => (
     <div>
       {props.item.title ? (
         <div>
@@ -27,7 +26,6 @@ const AccordianChild = props => {
         </div>
       )}
     </div>
-  );
-};
+);
 
 export default AccordianChild;

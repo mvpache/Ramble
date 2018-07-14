@@ -37,10 +37,6 @@ const Wrapper = styled.div`
 `;
 
 class MovieDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.resetLoading();
   }
@@ -48,7 +44,7 @@ class MovieDetails extends Component {
   render() {
     if (this.props.activeMovie.info.title === undefined) {
       this.props.performSearch(this.props.match.params.title);
-      this.props.history.push('/search'); //eventually update this to just jump to first results' page?
+      this.props.history.push('/search'); // eventually update this to just jump to first results' page?
     }
     return (
       <Movie>
@@ -86,15 +82,13 @@ class MovieDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    activeMovie: state.activeMovie,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activeMovie: state.activeMovie,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default connect(
   mapStateToProps,
-  { resetLoading, performSearch }
+  { resetLoading, performSearch },
 )(MovieDetails);

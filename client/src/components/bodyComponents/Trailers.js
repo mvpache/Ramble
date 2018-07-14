@@ -15,14 +15,10 @@ class Trailers extends Component {
   }
 
   componentDidMount() {
-    axios //refactor as action
+    axios // refactor as action
       .get(`${url}/api/trailer/${this.props.id}`)
-      .then(response =>
-        this.setState({ loaded: true, response: response.data })
-      )
-      .catch(response =>
-        this.setState({ loaded: true, response: response.data })
-      );
+      .then(response => this.setState({ loaded: true, response: response.data }))
+      .catch(response => this.setState({ loaded: true, response: response.data }));
   }
 
   render() {
@@ -39,12 +35,10 @@ class Trailers extends Component {
         return (
           <YouTube opts={opts} videoId={this.state.response.results[0].key} />
         );
-      } else {
-        return <h1>'No Trailer'</h1>;
       }
-    } else {
-      return <h1>'Loading'</h1>;
+      return <h1>'No Trailer'</h1>;
     }
+    return <h1>'Loading'</h1>;
   }
 }
 

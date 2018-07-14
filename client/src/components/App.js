@@ -20,20 +20,20 @@ class App extends Component {
 
 export default App;
 
-//!Features To do
+//! Features To do
 
-//TODO: Fuller styling
+// TODO: Fuller styling
 
-//TODO: Component unmount to deactivate movie/person
+// TODO: Component unmount to deactivate movie/person
 
-//TODO: Add a footer
+// TODO: Add a footer
 
-//TODO: Add similar?
+// TODO: Add similar?
 
-//TODO: Add a loading component/animation
+// TODO: Add a loading component/animation
 
-//TODO: Click on poster to see a larger version/or take you to poster viewer
+// TODO: Click on poster to see a larger version/or take you to poster viewer
 
-//TODO: if no active movie(didn't arrive by link) grab movie based on URL
+// TODO: if no active movie(didn't arrive by link) grab movie based on URL
 
-//TODO: Start the backend finally
+// TODO: Start the backend finally

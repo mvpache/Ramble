@@ -5,17 +5,13 @@ import { withRouter } from 'react-router-dom';
 import { activatePerson } from '../../../actions';
 
 class MovieCredits extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   activate(id) {
     this.props.activatePerson(id);
   }
 
   allCredits() {
     this.props.history.push(
-      `/movie/${this.props.activeMovie.info.title}/credits`
+      `/movie/${this.props.activeMovie.info.title}/credits`,
     );
   }
 
@@ -27,9 +23,8 @@ class MovieCredits extends Component {
       // if no writer, directed listed, don't display
       <div>
         Directed by:{' '}
-        {this.props.crew.map(item => {
-          if (item.job === 'Director') {
-            return (
+        {this.props.crew.map(
+          item => !item.job === 'Director' || (
               <p
                 key={item.id}
                 onClick={() => {
@@ -37,13 +32,11 @@ class MovieCredits extends Component {
                 }}>
                 {item.name}
               </p>
-            );
-          }
-        })}
+          ),
+        )}
         Screenplay by:{' '}
-        {this.props.crew.map(item => {
-          if (item.job === 'Screenplay') {
-            return (
+        {this.props.crew.map(
+          item => !item.job === 'Screenplay' || (
               <p
                 key={item.id}
                 onClick={() => {
@@ -51,13 +44,11 @@ class MovieCredits extends Component {
                 }}>
                 {item.name}
               </p>
-            );
-          }
-        })}
+          ),
+        )}
         Starring:{' '}
-        {this.props.cast.map(item => {
-          if (this.props.cast.indexOf(item) < 4) {
-            return (
+        {this.props.cast.map(
+          item => this.props.cast.indexOf(item) < 4 || (
               <p
                 key={item.id}
                 onClick={() => {
@@ -65,33 +56,30 @@ class MovieCredits extends Component {
                 }}>
                 {item.name}
               </p>
-            );
-          }
-        })}
+          ),
+        )}
         <p
           onClick={() => {
-            this.allCredits(); //need to pass in ID
+            this.allCredits(); // need to pass in ID
           }}>
           See Full Cast & Crew
         </p>{' '}
-        {/*should link to full credit comp*/}
+        {/* should link to full credit comp */}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    activePerson: state.activePerson,
-    activeMovie: state.activeMovie,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activePerson: state.activePerson,
+  activeMovie: state.activeMovie,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { activatePerson }
-  )(MovieCredits)
+    { activatePerson },
+  )(MovieCredits),
 );

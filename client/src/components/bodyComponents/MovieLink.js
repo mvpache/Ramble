@@ -34,17 +34,15 @@ class MovieLink extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    activeMovie: state.activeMovie,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activeMovie: state.activeMovie,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { activateMovie }
-  )(MovieLink)
+    { activateMovie },
+  )(MovieLink),
 );

@@ -38,8 +38,8 @@ class AccordianParent extends Component {
           {this.props.category}:{' '}
         </h3>
       );
-    } else if (this.props.contents[0].cast_id) {
-      //should display "Starring whoever as whatever"
+    } if (this.props.contents[0].cast_id) {
+      // should display "Starring whoever as whatever"
       return (
         <h3
           onClick={() => {
@@ -49,8 +49,8 @@ class AccordianParent extends Component {
           Starring:{' '}
         </h3>
       );
-    } else {
-      return (
+    }
+    return (
         <h3
           onClick={() => {
             this.toggleShow();
@@ -58,8 +58,7 @@ class AccordianParent extends Component {
         >
           Appeared in:{' '}
         </h3>
-      );
-    }
+    );
   }
 
   render() {
@@ -70,29 +69,25 @@ class AccordianParent extends Component {
       <div>
         {this.titleOfAccordian()}
         <div style={{ display: this.state.show ? 'inherit' : 'none' }}>
-          {this.props.contents.map(item => {
-            return (
+          {this.props.contents.map(item => (
               <AccordianChild
                 key={item.index}
                 item={item}
                 activate={() => this.activate(item)}
               />
-            );
-          })}
+          ))}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    activeMovie: state.activeMovie,
-    error: state.error,
-    loading: state.loading,
-  };
-};
+const mapStateToProps = state => ({
+  activeMovie: state.activeMovie,
+  error: state.error,
+  loading: state.loading,
+});
 
 export default withRouter(
-  connect(mapStateToProps, { activateMovie, activatePerson })(AccordianParent)
+  connect(mapStateToProps, { activateMovie, activatePerson })(AccordianParent),
 );
